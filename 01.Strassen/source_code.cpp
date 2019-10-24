@@ -10,7 +10,7 @@ typedef vector<int> row;
 // threshold 전역변수 선언
 int THRESHOLD = 1;
 
-//함수 선언
+// 함수 선언
 void data_init(matrix &, matrix &, matrix &);
 void matrix_init(int, matrix &);
 void matrix_split(matrix &, matrix &, matrix &, matrix &, matrix &);
