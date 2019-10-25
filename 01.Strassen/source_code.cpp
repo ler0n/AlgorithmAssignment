@@ -18,7 +18,7 @@ void matrix_merge(matrix &, matrix &, matrix &, matrix &, matrix &);
 void matrix_add(matrix, matrix, matrix &);
 void matrix_sub(matrix, matrix, matrix &);
 void matrix_mul(matrix, matrix, matrix &);
-void matrix_info(matrix &);
+void matrix_info(string, matrix &);
 void strassen(int, matrix, matrix, matrix &);
 
 int main(){
@@ -27,13 +27,13 @@ int main(){
 
     data_init(left, right, result);
     strassen(left.size(), left, right, result);
-    matrix_info(result);
+    matrix_info("연산 결과", result);
     return 0;
 }
 
-void data_init(matrix &dest1, matrix &dest2, matrix &res){
+void data_init(matrix &dest_left, matrix &dest_right, matrix &res){
     int n, cnt = 2;
-    matrix *dest[2] = {&dest2, &dest1};
+    matrix *dest[2] = {&dest_right, &dest_left};
     string dest_name[2] = {"오른쪽", "왼쪽"};
 
     cout << "행렬 크기 입력: ";
@@ -119,10 +119,10 @@ void matrix_mul(matrix src_left, matrix src_right, matrix &dest){
         }
     }
 }
-void matrix_info(matrix &src){
+void matrix_info(string name, matrix &src){
     int row_size = src.size();
     
-    cout << '\n' << "행렬 정보" << '\n';
+    cout << '\n' << name << " 행렬 정보\n";
     for(int i = 0; i < row_size; i++){
         int col_size = src[i].size();
 
@@ -141,7 +141,7 @@ void strassen(int n, matrix src_left, matrix src_right, matrix &dest){
     else{
         // src_left, src_right 행렬 4분할
         matrix_split(A[0][0], A[0][1], A[1][0], A[1][1], src_left);
-        matrix_split(B[0][0], B[0][1], B[1][0], B[1][1], src_left);
+        matrix_split(B[0][0], B[0][1], B[1][0], B[1][1], src_right);
         
         // M1 계산[(A11 + A22) * (B11 + B22)]
         matrix_add(A[0][0], A[1][1], temp1);
@@ -151,11 +151,11 @@ void strassen(int n, matrix src_left, matrix src_right, matrix &dest){
         // M2 계산[(A21 + A22) * B11]
         matrix_add(A[1][0], A[1][1], temp1);
         strassen(n/2, temp1, B[0][0], M[1]);
-
+        
         // M3 계산[A11 * (B12 - B22)]
         matrix_sub(B[0][1], B[1][1], temp1);
         strassen(n/2, A[0][0], temp1, M[2]);
-
+        
         // M4 계산[A22 * (B21 - B11)]
         matrix_sub(B[1][0], B[0][0], temp1);
         strassen(n/2, A[1][1], temp1, M[3]);
