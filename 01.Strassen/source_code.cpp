@@ -1,6 +1,7 @@
 // 기본 세팅
 #include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
 
 // 자료형 이름 재정의
