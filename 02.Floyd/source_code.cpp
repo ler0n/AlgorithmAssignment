@@ -5,7 +5,7 @@ using namespace std;
 
 // INF, NONE 매크로 정의
 #define INF 10000000
-#define NONE -1
+#define NONE -99
 
 // 자료형 이름 재정의
 typedef vector<vector<int> > matrix;
@@ -50,11 +50,11 @@ void data_init(matrix &dest1, matrix &dest2, matrix &dest3) {
 	matrix_init(n, dest2);
 	matrix_init(n, dest3);
 	for(int i = 0; i < n; i++) {
-		cout << i + 1 << "번째 정점의 경로들의 값 입력(무한대는 -1로 입력): ";
+		cout << i + 1 << "번째 정점의 경로들의 값 입력(무한대는 " << NONE << "로 입력): ";
 		for(int j = 0; j < n; j++) {
 			int temp;
 			cin >> temp;
-			dest1[i][j] = (temp == -1) ? INF : temp;
+			dest1[i][j] = (temp == NONE) ? INF : temp;
 		}
 	}
 }
@@ -62,16 +62,16 @@ void matrix_init(int n, matrix &dest) {
 	dest.resize(n, row(n, 0));
 }
 void floyd(int n, matrix &W, matrix &D, matrix &P) {
-	for (int i = 0; i<n; i++) {
-		for (int j = 0; j<n; j++) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
 			P[i][j] = NONE;
 		}
 	}
 	D = W;
 
-	for(int k = 0; k<n; k++) {
-		for(int i = 0; i<n; i++) {
-			for(int j = 0; j<n; j++) {
+	for(int k = 0; k < n; k++) {
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
 				if((D[i][k] + D[k][j]) < D[i][j]) {
 					P[i][j] = k;
 					D[i][j] = (D[i][k] + D[k][j]);
@@ -88,11 +88,11 @@ void path(int q, int r) {
 	}
 }
 void path() {
-	int p, q;
+	int q, r;
 
 	cout << "구하려는 경로 정점 번호 입력: ";
-	cin >> p >> q;
-	cout << "시작정점(V" << p << ")";
-	path(p - 1, q - 1);
-	cout << " 끝정점(V" << q << ")";
+	cin >> q >> r;
+	cout << "시작정점(V" << q << ")";
+	path(q - 1, r - 1);
+	cout << " 끝정점(V" << r << ")";
 }
