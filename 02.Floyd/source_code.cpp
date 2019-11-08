@@ -36,7 +36,7 @@ int main() {
 	floyd(W.size(), W, D, P);
 	path();
 	#ifdef _WIN32
-	system("timeout 3 > NUL");
+	system("timeout 5 > NUL");
 	#endif
 	return 0;
 }
@@ -49,9 +49,9 @@ void data_init(matrix &dest1, matrix &dest2, matrix &dest3) {
 	matrix_init(n, dest1);
 	matrix_init(n, dest2);
 	matrix_init(n, dest3);
-	for (int i = 0; i < n; i++) {
-		cout << i + 1 << "번쨰 정점의 경로들의 값 입력(무한대는 -1로 입력): ";
-		for (int j = 0; j < n; j++) {
+	for(int i = 0; i < n; i++) {
+		cout << i + 1 << "번째 정점의 경로들의 값 입력(무한대는 -1로 입력): ";
+		for(int j = 0; j < n; j++) {
 			int temp;
 			cin >> temp;
 			dest1[i][j] = (temp == -1) ? INF : temp;
@@ -69,10 +69,10 @@ void floyd(int n, matrix &W, matrix &D, matrix &P) {
 	}
 	D = W;
 
-	for (int k = 0; k<n; k++) {
-		for (int i = 0; i<n; i++) {
-			for (int j = 0; j<n; j++) {
-				if ((D[i][k] + D[k][j]) < D[i][j]) {
+	for(int k = 0; k<n; k++) {
+		for(int i = 0; i<n; i++) {
+			for(int j = 0; j<n; j++) {
+				if((D[i][k] + D[k][j]) < D[i][j]) {
 					P[i][j] = k;
 					D[i][j] = (D[i][k] + D[k][j]);
 				}
@@ -92,7 +92,7 @@ void path() {
 
 	cout << "구하려는 경로 정점 번호 입력: ";
 	cin >> p >> q;
-	cout << "V" << p;
+	cout << "시작정점(V" << p << ")";
 	path(p - 1, q - 1);
-	cout << " V" << q;
+	cout << " 끝정점(V" << q << ")";
 }
