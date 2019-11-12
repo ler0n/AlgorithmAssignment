@@ -13,13 +13,13 @@ typedef vector<int> row;
 
 // 전역변수 P행렬 선언
 matrix P;
+
 // 예제 데이터
 // 0, 1, INF, 1, 5
 // 9, 0, 3, 2, INF
 // INF, INF, 0, 4, INF
 // INF, INF, 2, 0, 3
 // 3, INF, INF, INF, 0
-
 
 void data_init(matrix &, matrix &, matrix &);
 void matrix_init(int, matrix &);
@@ -88,7 +88,5 @@ void path(){
 
     cout << "구하려는 경로 정점 번호 입력: ";
     cin >> p >> q;
-    cout << "V" << p;
     path(p-1, q-1);
-    cout << " V" << q;
 }
