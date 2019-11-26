@@ -1,6 +1,7 @@
 // 기본 세팅
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 #define N 10000
@@ -20,7 +21,7 @@ typedef struct nodetype universe[N];
 universe U;
 
 // 함수 선언
-void data_init(edges &);
+void data_init(int &, edges &);
 void show_union(edges &);
 void makeset(int);
 int find(int);
@@ -32,22 +33,24 @@ void kruskal(int, int, edges, edges &);
 int main(){
     ios_base::sync_with_stdio(false);
     edges E, F;
+    int num;
 
-    data_init(E);
-    kruskal(E.size(), E.size(), E, F);
+    data_init(num, E);
+    kruskal(num, E.size(), E, F);
     show_union(F);
     return 0;
 }
 
-void data_init(edges &dest){
-    int n;
+void data_init(int &dest1, edges &dest2){
+    int n, m;
 
-    cout << "간선 개수 입력: ";
-    cin >> n;
+    cout << "간선, 정점 개수 입력: ";
+    cin >> n >> m;
+    dest1 = m;
     for(int i = 0; i < n; i++){
         int cost, p, q;
         cin >> p >> q >> cost;
-        dest.push_back(edge(cost, make_pair(p, q)));
+        dest2.push_back(edge(cost, make_pair(p, q)));
     }
 }
 void show_union(edges &src){
