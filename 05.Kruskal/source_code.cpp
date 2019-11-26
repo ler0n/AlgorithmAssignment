@@ -4,7 +4,7 @@
 #include<algorithm>
 using namespace std;
 
-#define N 10000
+#define N 1000
 
 // 사용자 자료형 생성
 struct nodetype{
@@ -47,6 +47,7 @@ void data_init(int &dest1, edges &dest2){
     cout << "간선, 정점 개수 입력: ";
     cin >> n >> m;
     dest1 = m;
+    cout << "간선경로, 가중치 순으로 입력\n";
     for(int i = 0; i < n; i++){
         int cost, p, q;
         cin >> p >> q >> cost;
@@ -72,7 +73,7 @@ int find(int i){
 void merge(int p, int q){
     if(U[p].depth == U[q].depth){
         U[p].depth += 1;
-        U[q].depth = p;
+        U[q].parent = p;
     }
     else if(U[p].depth < U[q].depth) U[p].parent = q;
     else U[q].parent = p;
