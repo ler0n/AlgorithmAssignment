@@ -2,31 +2,26 @@
 #include<iostream>
 #include<vector>
 #include<string>
-#include<algorithm>
 using namespace std;
-
-#define MAX 10000000
-
-// 자료형 이름 재정의
-typedef vector<int> row;
-typedef vector<vector<int> > matrix;
 
 // 함수 선언
 void data_init(int &);
-void matrix_init(int, matrix &);
 void sum_of_subsets(int, int, int);
 bool promising(int, int, int);
 
+// 전역변수 선언
 int W;
-int w[1000];
-string include[1000];
+int w[100];
+string include[100];
 
 int main(){
     ios_base::sync_with_stdio(false);
+    cin.tie(0);
     int total = 0;
 
     data_init(total);
     sum_of_subsets(0, 0, total);
+    cout << endl;
     return 0;
 }
 
@@ -38,14 +33,11 @@ void data_init(int &dest){
     cout << "W 입력: ";
     cin >> W;
     for(int i = 0; i < n; i++){
-        cout << 'w' << i+1 << "입력: ";
+        cout << 'w' << i+1 << " 입력: ";
         cin >> m;
         w[i+1] = m;
         dest += m;
     }
-}
-void matrix_init(int n, matrix &dest){
-    dest.resize(n, row(n, MAX));
 }
 void sum_of_subsets(int i, int weight, int total){
     if(promising(i, weight, total)){
