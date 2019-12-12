@@ -34,10 +34,10 @@ int main() {
 
     data_init(W, D, P);
     floyd(W.size(), W, D, P);
-    path();#
-    ifdef _WIN32
-    system("timeout 5 > NUL");#
-    endif
+    path();
+    #ifdef _WIN32
+    system("timeout 5 > NUL");
+    #endif
     return 0;
 }
 
